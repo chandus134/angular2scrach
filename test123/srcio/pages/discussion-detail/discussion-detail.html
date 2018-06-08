@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{discussionDetail.discussionTitle}}</ion-title>
+    <!-- <ion-buttons end>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons> -->
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-item class="detail-item" *ngIf="discussionDetail.discussionTitle">
+    <ion-avatar padding-left class="detail-avt" item-start>
+      <img src="{{userInfo.photoURL ? userInfo.photoURL : 'assets/images/chatterplace.png'}}" onError="this.src='assets/images/chatterplace.png'">
+    </ion-avatar>
+    <h2 class="marginme">{{userInfo.displayName}}
+      <ion-icon name="flag" class="cmnt-date" (click)="presentPopover($event, discussionDetail.discussionDesc)"></ion-icon>
+    </h2>
+    <p class="marginme">{{ getDate(discussionDetail.createdAt) }}</p>
+    <div text-wrap padding-top padding-left>{{discussionDetail.discussionDesc}}</div>
+  </ion-item>
+  <div class="comments-sec">
+    <!-- <h3 padding-left>Comments</h3> -->
+    <!-- <ion-list [virtualScroll]="comments">
+      <ion-item class="detail-item"  *virtualItem="let comment"> -->
+    <ion-list>
+      <ion-item class="detail-item" *ngFor="let comment of comments">
+        <ion-avatar padding-left class="detail-avt" item-start>
+          <img src="{{comment.photoURL ? comment.photoURL : 'assets/images/chatterplace.png'}}" onError="this.src='assets/images/chatterplace.png'">
+        </ion-avatar>
+        <h2 class="marginme">{{comment.displayName}}
+          <ion-icon name="flag" class="cmnt-date" (click)="presentPopover($event)"></ion-icon>
+        </h2>
+        <p text-wrap class="marginme">{{ getDate(comment.commentDate) }}</p>
+        <div text-wrap padding-top padding-left>{{comment.comment}}</div>
+      </ion-item>
+    </ion-list>
+  </div>
+  <ion-fab bottom right (click)="goToAddComment()">
+    <button ion-fab>
+      <ion-icon name="ios-undo"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

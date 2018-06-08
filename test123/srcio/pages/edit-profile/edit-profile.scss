@@ -1,0 +1,77 @@
+page-edit-profile {
+    .menu-profile.edit{
+        width: 130px !important;
+        height: 130px !important;
+    }
+    .userImage{
+        display: block;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+    }
+    .edit-icon{
+        position: absolute;
+        left: 62%;
+        top: 15%;
+        color: map-get($colors , light );;
+        font-size: 39px;
+    }
+    .profileBlock{
+        // background-color: map-get($colors , primary-dark );
+    }
+    ion-avatar{
+        padding: 30px;
+    }
+    .cameraicon{
+        border: 1px solid;
+        border-radius: 50%;
+        width: 38px;    
+        font-size: 25px;
+        padding: 7px;
+        background-color: map-get($colors , primary );
+    }
+    .edit-btn{
+        // position: absolute;
+        margin-top: 40px;
+        width: 90%;
+        margin-left: 6%;
+        // bottom: 10%;
+    }
+
+    /*
+    *Media queries
+    *iPad 1024*1366
+    */
+    @media (width: 1024px) {
+        .menu-profile.edit {
+            width: 200px !important;
+            height: 200px !important;
+        }
+    }
+    /**
+    *iPad 768
+    */
+    @media (width: 768px) {
+        .menu-profile.edit {
+            width: 200px !important;
+            height: 200px !important;
+        }
+        .edit-icon{
+            left: 60%;
+        }
+        ion-label{
+            font-size: 1.8rem !important;
+        }
+    }
+
+    /**
+    *@size 600
+    */
+    @media (width: 600px) {
+        .edit-icon{
+            left: 58%;
+            top: 11%;
+        }
+    }
+    
+}

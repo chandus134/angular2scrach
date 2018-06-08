@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Edit Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div>
+    <!-- <ion-row>
+      <ion-col col-4>
+        <div class="side-img" text-center>
+          <img class="menu-profile edit" src="{{userprofile.photoURL ? userprofile.photoURL : 'assets/images/chatterplace.png'}}">
+        </div>
+        <ion-icon name="camera"></ion-icon>
+      </ion-col>
+    </ion-row> -->
+    <div class="profileBlock" (click)="importPicture()" text-center>
+      <ion-avatar>
+        <img text-center class="menu-profile edit userImage" src="{{userprofile.photoURL ? userprofile.photoURL:'assets/images/chatterplace.png'}}"
+          onError="this.src='assets/images/chatterplace.png'" />
+      </ion-avatar>
+      <div class="edit-icon">
+        <ion-icon class="cameraicon" name="camera"></ion-icon>
+      </div>
+      <span class="displayname" text-capitalize>{{userprofile.displayName}}</span>
+    </div>
+    <div class="form-div" padding>
+      <form [formGroup]='form' (ngSubmit)='updateProfile(form.value)'>
+
+        <ion-item>
+          <ion-label stacked>Display Name</ion-label>
+          <ion-input type='text' formControlName='displayName' [(ngModel)]='displayName'>
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Location:</ion-label>
+          <ion-input type="text" formControlName="userLocation" [(ngModel)]="userLocation"></ion-input>
+        </ion-item>
+
+        <div class="edit-btn" text-center>
+          <button ion-button block color="primary" text-center padding-top padding-bottom [disabled]="!form.valid">
+            Save
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,24 @@
+<div class="row">
+  
+  <div class="container">
+    <nav class="navbar navbar-light bg-light">
+      </nav>
+      <ul class="list-group">
+        <li class="list-group-item justify-content-between align-items-center" *ngFor="let inbox of inboxList" (click)="goToChat(inbox)">
+            <span>
+              <img *ngIf="inbox.photoURL;else other_content" [src]="inbox.photoURL" style="width:35px;border-radius:25px;">
+              <ng-template #other_content>
+                  <img src="../../assets/img/chatterplace.png" style="width:35px;border-radius: 25px;">
+              </ng-template>
+              <span style="display: inline-grid;padding: 5px;">{{inbox.displayName}}
+                  <span class="comments-font">{{inbox.lastmsg.message}}</span>
+                </span>
+                <span style="float:right" class="badge badge-pill badge-light">{{ inbox.lastmsg.sent ? getDate(inbox.lastmsg.sent.seconds) : '' }}</span>
+            </span>
+        </li>
+        <span class="comments-font" *ngIf="noData">
+            You haven’t started chat.
+        </span>
+      </ul>
+    </div> 
+  </div>

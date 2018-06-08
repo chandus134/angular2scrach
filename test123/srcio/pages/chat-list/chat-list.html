@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Inbox</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item class="detail-item" *ngFor="let inbox of inboxList" (click)="goToChat(inbox)">
+      <ion-avatar padding-left class="detail-avt" item-start>
+        <img src="{{inbox.photoURL ? inbox.photoURL : 'assets/images/chatterplace.png'}}" onError="this.src='assets/images/chatterplace.png'">
+      </ion-avatar>
+      <h2>{{inbox.displayName}}</h2>
+      <p text-wrap>{{inbox.lastmsg.message ? inbox.lastmsg.message : '&nbsp;'}}</p>
+      <ion-note item-end>{{ inbox.lastmsg.sent ? getDate(inbox.lastmsg.sent) : '' }}</ion-note>
+    </ion-item>
+  </ion-list>
+  <div *ngIf="inboxList.length === 0 && showMe" >
+    <h4 class="network-empty">You haven’t anyone message in your inbox.</h4>  
+  </div>
+</ion-content>

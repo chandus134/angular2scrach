@@ -1,0 +1,38 @@
+<!-- <div class="row">
+  <div class="col-lg-12">
+      <button class="btn btn-primary btn-sm" style="float: right;
+      margin: 10px;
+      background-color: #3d2c57;" (click)="goToSearchUser()" *ngIf="listFlag">Add</button>
+  </div>
+</div> -->
+  
+<div *ngIf="listFlag" class="container">
+  <h2>Network</h2>
+  <nav class="navbar navbar-light bg-light">
+      <button class="btn btn-outline-primary my-2 my-sm-0" (click)="goToSearchUser()" *ngIf="listFlag">Add</button>
+    <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" name="searchText" [(ngModel)]="searchText" (ngModelChange)="search(searchText)" placeholder="Search..." aria-label="Search">
+    </form>
+  </nav>
+  <ul class="list-group">
+    <li class="list-group-item justify-content-between align-items-center" *ngFor="let friend of friends">
+        <span>
+        <img *ngIf="friend.photoURL;else other_content" [src]="friend.photoURL" style="width:35px;border-radius:25px;">
+        <ng-template #other_content>
+            <img src="../../assets/img/chatterplace.png" style="width:35px;border-radius: 25px;">
+        </ng-template>
+        <span style="display: inline-grid;padding: 5px;">{{friend.displayName}}
+            <span class="comments-font">{{friend.userLocation}}</span>
+          </span>
+        </span>
+    </li>
+    <span class="comments-font" *ngIf="noData">
+        You haven’t added anyone to
+        your network.
+    </span>
+  </ul>
+</div>                  
+  
+  
+  
+  

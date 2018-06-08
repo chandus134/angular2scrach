@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Add Comment</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only [disabled]="!form.valid" (click)="addComment(form.value)">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <h2>Posting as Chase Goodman</h2>
+      <p>Remember, anyone on the internet can see this post.</p>
+    </ion-item>
+  </ion-list>
+  <form [formGroup]='form'>
+    <ion-item>
+      <ion-label stacked>Comment:</ion-label>
+      <ion-input type="text" formControlName="comment" [(ngModel)]="comment"></ion-input>
+    </ion-item>
+  </form>
+</ion-content>

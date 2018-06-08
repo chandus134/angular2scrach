@@ -1,0 +1,26 @@
+<div class="container">
+  <h2>Chat</h2>
+  <nav class="navbar navbar-light bg-light">
+      <button class="btn btn-outline-primary my-2 my-sm-0" (click)="goToInbox()">Back</button>
+  </nav>
+  <ul class="list-group">
+    <li class="list-group-item justify-content-between align-items-center" *ngFor = "let item of allmessages; let i = index">
+      <span class="sent" *ngIf="item.sender != currentUser.uid">
+        {{item.message}}
+      </span>
+      <span class="replies" *ngIf="item.sender === currentUser.uid">
+        {{item.message}}
+      </span>
+    </li>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Type something..." aria-label="Recipient's username" aria-describedby="basic-addon2" [(ngModel)]="newmessage">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary bg-secondary text-white" type="button" (click)='addmessage()'>Add</button>
+      </div>
+    </div>
+    <span class="comments-font" *ngIf="noData">
+        You haven’t added anyone to
+        your network.
+    </span>
+  </ul>
+</div>       

@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Network</ion-title>
+  </ion-navbar>
+  <ion-toolbar color='primary'>
+    <ion-searchbar [(ngModel)]="searchText" (input)="search(searchText)" (ionClear)="onClear()"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list no-lines>
+    <ion-item *ngFor="let friend of friends" (click)="goToChat(friend)">
+      <ion-avatar item-start>
+        <img src="{{friend.photoURL ? friend.photoURL : 'assets/images/chatterplace.png'}}" onError="this.src='assets/images/chatterplace.png'">
+      </ion-avatar>
+      <h2 text-capitalize>{{friend.displayName}}</h2>
+      <p>{{friend.userLocation}}</p>
+    </ion-item>
+  </ion-list>
+  <h4 *ngIf="tempArrLength == 0 && showMe" class="network-empty">You haven’t added anyone to your network.</h4>
+  <ion-fab bottom right (click)="goToSearchUser()">
+    <button ion-fab>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

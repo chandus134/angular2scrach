@@ -1,0 +1,44 @@
+<!-- <ion-nav #myNav [root]="rootPage"></ion-nav> -->
+<ion-menu id="myMenu" [content]="content">
+    <ion-header class="sidemenu-header" padding-top padding-right padding-bottom>
+        <ion-row>
+            <ion-col col-4>
+                <div class="side-img" menuClose text-center (click)="viewPhoto(profile.photoURL ? profile.photoURL : 'assets/images/chatterplace.png', profile.displayName)">
+                    <img class="menu-profile" src="{{profile.photoURL ? profile.photoURL : 'assets/images/chatterplace.png'}}" >
+                </div>
+            </ion-col>
+            <ion-col col-8 >
+                <div menuClose (click)="editProfile()" class="setting-icon"><ion-icon name="settings"></ion-icon></div>
+                <div class="profile-info">
+                    <span text-capitalize>{{ profile.displayName ? profile.displayName : ''}}</span><br />
+                    <span text-wrap class="profile-email">{{profile.email ? profile.email : ''}}</span>
+                </div>
+                <!-- <p text-capitalize>{{ profile.displayName ? profile.displayName : ''}}</p>
+                <p class="sideemail">{{profile.email ? profile.email : ''}}</p> -->
+            </ion-col>
+        </ion-row>
+    </ion-header>
+    <div class="single-line" padding-left padding-right></div>
+    <ion-content class="custom-content">
+        <ion-list no-lines>
+            <button class="menus-background" detail-none menuClose [class.activeHighlight]="checkActive(p)" ion-item *ngFor="let p of pages" (click)="openPage(p)">
+                <ion-icon class="sidemenu-icon" name="{{p.icon}}" color="iconclr"></ion-icon>
+                <span class="side-menu-title" padding-top text-capitalize>{{p.title}}</span>
+            </button>
+            <button class="menus-background" detail-none menuClose ion-item (click)="share()">
+                <ion-icon class="sidemenu-icon" name="md-share" color="iconclr"></ion-icon>
+                <span class="side-menu-title" padding-top text-capitalize>Invite a friend</span>
+            </button>
+        </ion-list>
+    </ion-content>
+    <ion-footer>
+        <ion-toolbar menuClose (click)="logOut()">
+            <ion-title>
+                <ion-icon class="logout" ios="ios-log-out" md="md-log-out"></ion-icon>
+                <span class="logout" padding-left> LOGOUT</span>
+            </ion-title>
+        </ion-toolbar>
+    </ion-footer>
+</ion-menu>
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

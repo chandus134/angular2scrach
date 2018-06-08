@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-lg-12">
+      <button class="btn btn-primary btn-sm" style="float: right;
+      margin: 10px;
+      background-color: #3d2c57;" (click)="goto()" *ngIf="!listFlag">Back</button>
+  </div>
+</div>
+<div class="container">
+  <h2>Users</h2>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Username</th>
+          <th scope="col">Email</th>
+          <th scope="col">Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of userlist;  let i = index">
+          <th scope="row">
+            <!-- {{i+1}} -->
+              <img *ngIf="user.photoURL;else other_content" [src]="user.photoURL" style="width:35px;border-radius:25px;">
+              <ng-template #other_content>
+                  <img src="../../../assets/img/chatterplace.png" style="width:35px;border-radius: 25px;">
+              </ng-template>
+          </th>
+          <td>{{user.displayName}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.userLocation}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

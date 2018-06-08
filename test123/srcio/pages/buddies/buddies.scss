@@ -1,0 +1,39 @@
+page-buddies {
+    ion-icon{
+        font-size: 25px;
+        margin-top: inherit;
+    }
+    .shareicon{
+        float: right;
+    }
+    .back-button{
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        // background: red;
+        color: #ccc;
+    }
+    .back-button ion-icon{
+        color: rgb(128, 126, 126);
+    }
+    .searchbar-search-icon{
+        display: none;
+    }
+    .invite{
+        font-size: 1.9rem;
+        color: rgb(97, 93, 93);
+        padding-left: 0 !important;
+    }
+    .invite h2{
+        font-size: 1.9rem !important;
+    }
+    .invite .item-inner{
+        border-bottom: 1px solid #dedede;
+    }
+    .invite .input-wrapper{
+        padding-left: 16px;
+    }
+    .buddies-list .item-inner {
+        border-bottom: 0 !important;
+    }
+}

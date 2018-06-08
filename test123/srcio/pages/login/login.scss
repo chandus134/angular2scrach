@@ -1,0 +1,35 @@
+page-login {
+    .fireui{
+        bottom: 15%;
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+    .firebaseui-idp-button{
+        max-width: 90% !important;
+        width: 80%;
+    }
+    .applogo{
+        width: 80%;
+        padding-top: 15%;
+    }
+    .appname{
+        font-size: 45px;
+    }
+    .musician{
+        color: map-get($colors, primary);
+    }
+    .town{
+        color: map-get($colors, btncolor)
+    }
+    .mdl-card{
+        position: fixed;
+        top: 40px;
+    }
+    .firebaseui-title{
+        color: map-get($colors, btncolor);
+    }
+    .firebaseui-container{
+        height: 100%;
+    }
+}

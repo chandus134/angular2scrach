@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Discussion</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list [virtualScroll]="discussions">
+    <ion-item *virtualItem="let discussion" (click)="detail(discussion.id)">
+      <h2 text-capitalize>{{ discussion.discussionTitle }}</h2>
+      <p>{{ discussion.discussionDesc}}</p>
+      <ion-note item-end>{{ getDate(discussion.createdAt) }}</ion-note>
+    </ion-item>
+  </ion-list>
+  <div *ngIf="showMe">
+    <ion-list padding *ngIf="discussions.length == 0">
+      <ion-item class="noRecordFoundImg" padding-top>
+        <img class="noRecordFound" src="assets/images/no-record.png">
+      </ion-item>
+    </ion-list>
+  </div>
+  <ion-fab bottom right (click)="goToCreateDiss()">
+    <button ion-fab>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

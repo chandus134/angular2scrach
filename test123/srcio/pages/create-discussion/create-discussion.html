@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ title }}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only [disabled]="!form.valid" (click)="saveDocument(form.value)">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item >
+      <h2>Posting as Chase Goodman</h2>
+      <p>Remember, anyone on the internet can see this post.</p>
+    </ion-item>
+  </ion-list>
+  <form [formGroup]='form' (ngSubmit)='saveDocument(form.value)'>
+
+    <ion-item>
+      <!-- <ion-label stacked>Title</ion-label> -->
+      <ion-input type='text' formControlName='discussionTitle' [(ngModel)]='discussionTitle' placeholder="Title">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <!-- <ion-label stacked>Description:</ion-label> -->
+      <ion-textarea type="text" formControlName="discussionDesc" [(ngModel)]="discussionDesc" placeholder="Enter your message"
+        row="3"></ion-textarea>
+    </ion-item>
+  </form>
+</ion-content>

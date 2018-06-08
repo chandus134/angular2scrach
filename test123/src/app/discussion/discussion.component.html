@@ -1,0 +1,123 @@
+<div class="row">
+  <div class="col-lg-12">
+      <button class="btn btn-primary btn-sm" style="float: right;
+      margin: 10px;
+      background-color: #3d2c57;" (click)="createDiscussion()" *ngIf="listFlag">New Post</button>
+      <button class="btn btn-primary btn-sm" style="float: right;
+      margin: 10px;
+      background-color: #3d2c57;" (click)="clearForm()" *ngIf="!listFlag">Back</button>
+  </div>
+</div>
+
+<div *ngIf="createFlag" class="container">
+  <h2>New Post</h2>
+  <span style="display: inline-grid;padding: 5px;">Posting as {{userDetails.displayName}}
+    <span class="comments-font">Remember anyone on the internet can see this post</span>
+  </span>
+  <form #f="ngForm" class="form-horizontal" (ngSubmit)="addDiscussion(discussionObj)">
+    <div class="form-group">
+      <!-- <label class="control-label col-sm-2" for="location">Title:</label> -->
+      <div class="col-sm-offset-2 col-sm-10">
+        <input type="text" placeholder="Title" class="form-control col-sm-4" id="usr" name="location" [(ngModel)]='discussionObj.discussionTitle' required>
+      </div>
+    </div>
+    <div class="form-group">
+      <!-- <label class="control-label col-sm-2" for="name">Description:</label> -->
+      <div class="col-sm-offset-2 col-sm-10">
+        <textarea type="text" placeholder="Enter your message" class="form-control col-sm-4" id="usr" name="name" [(ngModel)]='discussionObj.discussionDesc' required></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="listFlag" class="container">
+    <h2>Discussions</h2>
+<ul class="list-group">
+    <li class="list-group-item justify-content-between align-items-center" *ngFor="let discussion of discussions">
+        <h6>{{ discussion.discussionTitle }}</h6>
+        <span>{{ discussion.discussionDesc}}</span>
+        <span class="badge badge-primary badge-pill" style="float:right;cursor: pointer;" (click)="getDiscussionDetail(discussion.id)">{{ discussion.comments?.length || '0' }}</span>
+    </li>
+</ul>
+</div>
+
+<div *ngIf="detailsFlag" class="container"> 
+    <div class="media">
+      <div class="media-left" style="padding: 8px;">
+        <img src="{{userInfo.photoURL ? userInfo.photoURL : '../../assets/img/chatterplace.png'}}" class="media-object" style="width:45px;border-radius:25px;">
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">{{discussionDetail.discussionTitle }}<small style="float:right"><i>Posted on {{getDate(discussionDetail.createdAt)}}</i></small></h4>
+        <p>{{ discussionDetail.discussionDesc}}
+          <!-- <span style="float:right" class="badge badge-pill badge-warning" (click)="reportToSpam(1)">Mark as Spam</span> -->
+          <span style="float:right" [datatoggle]="{querySelector:'.dropdown-menu'}" class="oi oi-flag" title="report" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" (click)="reportToSpam(1)">Report Spam</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" (click)="reportToSpam(2)">Report Inappropriate Content</a>
+              </div>
+            </span>
+        </p>
+      </div>
+    </div>
+    <div class="media">
+        <div class="media-left" style="padding: 8px;">
+            <h6 class="media-heading">Comments</h6>
+        </div>
+    </div>        
+    <div class="list-group">
+        <li class="list-group-item" *ngFor="let comment of comments">
+          <span>
+            <img *ngIf="comment.photoURL;else other_content" [src]="comment.photoURL" style="width:35px;border-radius:25px;">
+            <ng-template #other_content>
+                <img src="../../assets/img/chatterplace.png" style="width:35px;border-radius: 25px;">
+            </ng-template>
+            <span style="display: inline-grid;padding: 5px;">{{comment.comment}}
+              <span class="comments-font">{{comment.displayName}}</span>
+            </span>
+            <span style="float:right" class="badge badge-pill badge-light" (click)="reportToSpam()">{{getDate(comment.commentDate)}}</span>
+            <p style="float:right" [datatoggle]="{querySelector:'.dropdown-menu'}" class="oi oi-flag" title="report" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" (click)="reportToSpamComment(comment.comment,1)">Report Spam</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" (click)="reportToSpamComment(comment.comment,2)">Report Inappropriate Content</a>
+                </span>
+              </p>
+          </span>
+        </li>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Add comment..." aria-label="Recipient's username" aria-describedby="basic-addon2" [(ngModel)]="comment">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary bg-secondary text-white" type="button" (click)='addComment(comment,discussionDetail.id)'>Add</button>
+            </div>
+          </div>
+      </div>
+    <!-- <form #f="ngForm" class="form-horizontal" (ngSubmit)="addDiscussion(discussionObj)">
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="location">Title:</label>
+        <div class="col-sm-offset-2 col-sm-10">
+          <input type="text" class="form-control col-sm-2" id="usr" name="location" [(ngModel)]='discussionObj.discussionTitle'>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="name">Description:</label>
+        <div class="col-sm-offset-2 col-sm-10">
+          <input type="text" class="form-control col-sm-2" id="usr" name="name" [(ngModel)]='discussionObj.discussionDesc'>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+      </div>
+    </form> -->
+  </div>
+                
+
+
+
